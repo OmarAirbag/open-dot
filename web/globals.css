@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-dm-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Airbag Studio — tema web standard (web-style.md, repo àncora orchestratore-progetti)
+ * Origine: lead-intelligence ("warm dark" brand-aligned), esteso con variante light.
+ *
+ *   - primary: arancione Airbag (#FF6B1A — logo + sito airbagstudio.it)
+ *   - chart-2: borgogna del logo 3D (#7C2541) come accento secondario
+ *   - neutri warm in entrambi i temi: dark "marrone-grezzo" (#100E0B...),
+ *     light "avorio caldo" (#FAF7F2...) — mai grigi freddi/blu-graphite
+ *   - il testo su --primary è sempre scuro: l'arancione non regge testo bianco
+ *
+ * :root = light, .dark = dark. Toggle via classe su <html> (es. next-themes).
+ * I tool interni partono in dark; i prodotti per clienti partono in light e
+ * rispettano prefers-color-scheme.
+ */
+:root {
+  --background: #FAF7F2;
+  --foreground: #1A1815;
+  --card: #FFFFFF;
+  --card-foreground: #1A1815;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1815;
+  --primary: #FF6B1A;
+  --primary-foreground: #100E0B;
+  --secondary: #F1ECE3;
+  --secondary-foreground: #1A1815;
+  --muted: #F1ECE3;
+  --muted-foreground: #8A8174;
+  --accent: #EDE7DD;
+  --accent-foreground: #1A1815;
+  --destructive: #DC2626;
+  --border: #E5DFD4;
+  --input: #E5DFD4;
+  --ring: #FF6B1A;
+  --chart-1: #FF6B1A;
+  --chart-2: #7C2541;
+  --chart-3: #D97706;
+  --chart-4: #059669;
+  --chart-5: #4F6BDB;
+  --radius: 0.625rem;
+  --sidebar: #F4F0E9;
+  --sidebar-foreground: #1A1815;
+  --sidebar-primary: #FF6B1A;
+  --sidebar-primary-foreground: #100E0B;
+  --sidebar-accent: #EDE7DD;
+  --sidebar-accent-foreground: #1A1815;
+  --sidebar-border: #E5DFD4;
+  --sidebar-ring: #FF6B1A;
+}
+
+.dark {
+  --background: #100E0B;
+  --foreground: #EDE7DD;
+  --card: #1A1815;
+  --card-foreground: #EDE7DD;
+  --popover: #1A1815;
+  --popover-foreground: #EDE7DD;
+  --primary: #FF6B1A;
+  --primary-foreground: #100E0B;
+  --secondary: #1F1B17;
+  --secondary-foreground: #EDE7DD;
+  --muted: #1F1B17;
+  --muted-foreground: #7E7669;
+  --accent: #26221E;
+  --accent-foreground: #EDE7DD;
+  --destructive: #EF4444;
+  --border: #2D2A26;
+  --input: #2D2A26;
+  --ring: #FF6B1A;
+  --chart-1: #FF6B1A;
+  --chart-2: #7C2541;
+  --chart-3: #F59E0B;
+  --chart-4: #10B981;
+  --chart-5: #6B8AFF;
+  --sidebar: #1A1815;
+  --sidebar-foreground: #EDE7DD;
+  --sidebar-primary: #FF6B1A;
+  --sidebar-primary-foreground: #100E0B;
+  --sidebar-accent: #26221E;
+  --sidebar-accent-foreground: #EDE7DD;
+  --sidebar-border: #2D2A26;
+  --sidebar-ring: #FF6B1A;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

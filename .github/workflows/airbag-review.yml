@@ -1,0 +1,41 @@
+name: Airbag review
+
+# Gate deterministico delle PR: esegue le rule di tools/review/review-contract.md
+# sul diff della PR. hard → exit 1 → merge bloccato; soft/advisory → log senza
+# bloccare. Contratto e motore sono del progetto: il motore è lo snapshot
+# ereditato dal template alla creazione (vedi tools/review/README.md).
+#
+# Il layer LLM resta OFF in CI (determinismo + costo).
+
+on:
+  pull_request:
+
+# Una sola run per PR: le push successive annullano quella in corso.
+concurrency:
+  group: airbag-review-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # fetch-depth 0: servono la storia e il ref del base branch per
+      # `git diff origin/<base>..HEAD`. Su pull_request HEAD è il merge-ref
+      # (base + PR), quindi il diff è esattamente ciò che il merge introdurrebbe.
+      - name: Checkout (storia completa per il diff)
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      # Il motore usa solo node:* builtins: basta tsx via npx, niente install.
+      - name: Review (gate hard sul contratto)
+        run: npx --yes tsx@4 tools/review/src/cli.ts diff --base "origin/${{ github.base_ref }}" --head HEAD

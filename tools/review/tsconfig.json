@@ -1,0 +1,10 @@
+{
+  // tsconfig per il POC di review (`tools/review/`). Standalone: NON estende
+  // scripts/tsconfig.json (che esiste solo per lo shim server-only). Il tool è
+  // offline, non importa nulla da src/, quindi non serve baseUrl né mapping.
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext"]
+  },
+  "include": ["src/**/*.ts"]
+}

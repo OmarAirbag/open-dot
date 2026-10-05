@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+# Dipendenze / build (estendi per stack)
+node_modules/
+dist/
+build/
+.next/
+*.xcresult/
+# Env / segreti — mai committare
+.env
+.env.local
+*.local
+# Editor
+.vscode/
+.idea/
